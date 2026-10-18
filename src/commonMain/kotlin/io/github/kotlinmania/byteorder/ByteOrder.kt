@@ -5,29 +5,51 @@ package io.github.kotlinmania.byteorder
  */
 public abstract class ByteOrder {
     public abstract fun readU16(buf: ByteArray, offset: Int = 0): UShort
+
     public fun readI16(buf: ByteArray, offset: Int = 0): Short = readU16(buf, offset).toShort()
+
     public abstract fun readU24(buf: ByteArray, offset: Int = 0): UInt
+
     public abstract fun readI24(buf: ByteArray, offset: Int = 0): Int
+
     public abstract fun readU32(buf: ByteArray, offset: Int = 0): UInt
+
     public fun readI32(buf: ByteArray, offset: Int = 0): Int = readU32(buf, offset).toInt()
+
     public abstract fun readU48(buf: ByteArray, offset: Int = 0): ULong
+
     public abstract fun readI48(buf: ByteArray, offset: Int = 0): Long
+
     public abstract fun readU64(buf: ByteArray, offset: Int = 0): ULong
+
     public fun readI64(buf: ByteArray, offset: Int = 0): Long = readU64(buf, offset).toLong()
+
     public fun readF32(buf: ByteArray, offset: Int = 0): Float = Float.fromBits(readI32(buf, offset))
+
     public fun readF64(buf: ByteArray, offset: Int = 0): Double = Double.fromBits(readI64(buf, offset))
 
     public abstract fun writeU16(buf: ByteArray, n: UShort, offset: Int = 0)
+
     public fun writeI16(buf: ByteArray, n: Short, offset: Int = 0) = writeU16(buf, n.toUShort(), offset)
+
     public abstract fun writeU24(buf: ByteArray, n: UInt, offset: Int = 0)
+
     public fun writeI24(buf: ByteArray, n: Int, offset: Int = 0) = writeU24(buf, n.toUInt(), offset)
+
     public abstract fun writeU32(buf: ByteArray, n: UInt, offset: Int = 0)
+
     public fun writeI32(buf: ByteArray, n: Int, offset: Int = 0) = writeU32(buf, n.toUInt(), offset)
+
     public abstract fun writeU48(buf: ByteArray, n: ULong, offset: Int = 0)
+
     public fun writeI48(buf: ByteArray, n: Long, offset: Int = 0) = writeU48(buf, n.toULong(), offset)
+
     public abstract fun writeU64(buf: ByteArray, n: ULong, offset: Int = 0)
+
     public fun writeI64(buf: ByteArray, n: Long, offset: Int = 0) = writeU64(buf, n.toULong(), offset)
+
     public fun writeF32(buf: ByteArray, n: Float, offset: Int = 0) = writeI32(buf, n.toRawBits(), offset)
+
     public fun writeF64(buf: ByteArray, n: Double, offset: Int = 0) = writeI64(buf, n.toRawBits(), offset)
 
     public fun readU16Into(src: ByteArray, dst: UShortArray) {
