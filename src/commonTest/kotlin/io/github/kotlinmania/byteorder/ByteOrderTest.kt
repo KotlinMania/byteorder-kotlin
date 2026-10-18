@@ -158,7 +158,7 @@ class ByteOrderTest {
                 val buf = ByteArray(16)
                 order.writeF32(buf, n)
                 val read = order.readF32(buf)
-                assertEquals(n, read)
+                assertEquals(n.toRawBits(), read.toRawBits())
             }
         }
     }
@@ -171,7 +171,7 @@ class ByteOrderTest {
                 val buf = ByteArray(16)
                 order.writeF64(buf, n)
                 val read = order.readF64(buf)
-                assertEquals(n, read)
+                assertEquals(n.toRawBits(), read.toRawBits())
             }
         }
     }
