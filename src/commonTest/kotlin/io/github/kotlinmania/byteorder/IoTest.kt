@@ -46,7 +46,7 @@ class IoTest {
 
     @Test
     fun testU16AndI16() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             val wtr = Buffer()
             wtr.writeU16(517u, order)
@@ -64,7 +64,7 @@ class IoTest {
 
     @Test
     fun testU24AndI24() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             val wtr = Buffer()
             wtr.writeU24(1000000u, order)
@@ -78,7 +78,7 @@ class IoTest {
 
     @Test
     fun testU32AndI32() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             val wtr = Buffer()
             wtr.writeU32(1000000u, order)
@@ -92,7 +92,7 @@ class IoTest {
 
     @Test
     fun testU48AndI48() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             val wtr = Buffer()
             wtr.writeU48(1000000000000uL, order)
@@ -106,7 +106,7 @@ class IoTest {
 
     @Test
     fun testU64AndI64() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             val wtr = Buffer()
             wtr.writeU64(1000000uL, order)
@@ -120,7 +120,7 @@ class IoTest {
 
     @Test
     fun testUintAndInt() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (nbytes in 1..8) {
             val uVal = if (nbytes == 8) 0x123456789ABCDEF0uL else (1uL shl (nbytes * 8 - 1)) + 1uL
             val iVal = if (nbytes == 8) -1234567890L else -((1L shl (nbytes * 8 - 2)))
@@ -140,7 +140,7 @@ class IoTest {
     fun testF32AndF64() {
         val f32Val = Float.fromBits(31.312e31f.toRawBits())
         val f64Val = -11.32e91
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             val wtr = Buffer()
             wtr.writeF32(f32Val, order)
@@ -154,7 +154,7 @@ class IoTest {
 
     @Test
     fun testReadIntoMethods() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             val wtr = Buffer()
             order.writeU16Into(

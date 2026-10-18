@@ -83,6 +83,7 @@ public abstract class ByteOrder {
         writeI64(buf, n.toRawBits(), offset)
     }
 
+
     public fun readU16Into(src: ByteArray, dst: UShortArray) {
         require(src.size == dst.size * 2) { "src size must equal dst size * 2" }
         for (i in dst.indices) {

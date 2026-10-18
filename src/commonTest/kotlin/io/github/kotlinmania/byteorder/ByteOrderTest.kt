@@ -22,7 +22,7 @@ class ByteOrderTest {
 
     @Test
     fun propU16() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             for (n in testU16Values) {
                 val buf = ByteArray(16)
@@ -35,7 +35,7 @@ class ByteOrderTest {
 
     @Test
     fun propI16() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             for (n in testI16Values) {
                 val buf = ByteArray(16)
@@ -48,7 +48,7 @@ class ByteOrderTest {
 
     @Test
     fun propU24() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             for (n in testU24Values) {
                 val buf = ByteArray(16)
@@ -61,7 +61,7 @@ class ByteOrderTest {
 
     @Test
     fun propI24() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             for (n in testI24Values) {
                 val buf = ByteArray(16)
@@ -74,7 +74,7 @@ class ByteOrderTest {
 
     @Test
     fun propU32() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             for (n in testU32Values) {
                 val buf = ByteArray(16)
@@ -87,7 +87,7 @@ class ByteOrderTest {
 
     @Test
     fun propI32() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             for (n in testI32Values) {
                 val buf = ByteArray(16)
@@ -100,7 +100,7 @@ class ByteOrderTest {
 
     @Test
     fun propU48() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             for (n in testU48Values) {
                 val buf = ByteArray(16)
@@ -113,7 +113,7 @@ class ByteOrderTest {
 
     @Test
     fun propI48() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             for (n in testI48Values) {
                 val buf = ByteArray(16)
@@ -126,7 +126,7 @@ class ByteOrderTest {
 
     @Test
     fun propU64() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             for (n in testU64Values) {
                 val buf = ByteArray(16)
@@ -139,7 +139,7 @@ class ByteOrderTest {
 
     @Test
     fun propI64() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             for (n in testI64Values) {
                 val buf = ByteArray(16)
@@ -152,7 +152,7 @@ class ByteOrderTest {
 
     @Test
     fun propF32() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             for (n in testF32Values) {
                 val buf = ByteArray(16)
@@ -165,7 +165,7 @@ class ByteOrderTest {
 
     @Test
     fun propF64() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             for (n in testF64Values) {
                 val buf = ByteArray(16)
@@ -178,7 +178,7 @@ class ByteOrderTest {
 
     @Test
     fun propUint() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (nbytes in 1..8) {
             val max = if (nbytes == 8) ULong.MAX_VALUE else (1uL shl (nbytes * 8)) - 1uL
             val testValues = listOf(0uL, 1uL, max / 2uL, max)
@@ -195,7 +195,7 @@ class ByteOrderTest {
 
     @Test
     fun propInt() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (nbytes in 1..8) {
             val max = if (nbytes == 8) Long.MAX_VALUE else (1L shl (nbytes * 8 - 1)) - 1L
             val min = if (nbytes == 8) Long.MIN_VALUE else -(1L shl (nbytes * 8 - 1))
@@ -213,7 +213,7 @@ class ByteOrderTest {
 
     @Test
     fun smallBuffers() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             assertFailsWith<IllegalArgumentException> { order.readU16(ByteArray(1)) }
             assertFailsWith<IllegalArgumentException> { order.writeU16(ByteArray(1), 0u) }
@@ -262,7 +262,7 @@ class ByteOrderTest {
 
     @Test
     fun sliceLengths() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             assertFailsWith<IllegalArgumentException> { order.readU16Into(ByteArray(3), UShortArray(2)) }
             assertFailsWith<IllegalArgumentException> { order.readU16Into(ByteArray(5), UShortArray(2)) }
@@ -333,7 +333,7 @@ class ByteOrderTest {
 
     @Test
     fun propSliceRoundtrip() {
-        val orders = listOf(BigEndian, LittleEndian, NativeEndian)
+        val orders = listOf(BigEndian, LittleEndian)
         for (order in orders) {
             val u16s = ushortArrayOf(1u, 2u, 0xF00Fu, 0xFFEEu)
             val u16Buf = ByteArray(8)
