@@ -25,6 +25,8 @@ high_priority_ports.md
 NEXT_ACTIONS.md
 port_lint_proposed_changes.md
 ast_distance_*.txt
+deep_symbol_inventory.txt
+*_symbol_inventory.txt
 .cache/
 *.lock
 kotlin-js-store/*

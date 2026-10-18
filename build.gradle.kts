@@ -1478,6 +1478,10 @@ tasks.register("swiftExportSmokeTest") {
     }
 }
 
+tasks.named("test") {
+    dependsOn("swiftExportSmokeTest")
+}
+
 // ============================================================================
 // `build` aggregate
 // ----------------------------------------------------------------------------
