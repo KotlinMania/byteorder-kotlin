@@ -6,7 +6,7 @@ import kotlin.test.assertFailsWith
 
 class ByteOrderTest {
     private val testU16Values = listOf(0u.toUShort(), 1u.toUShort(), 517u.toUShort(), 768u.toUShort(), UShort.MAX_VALUE)
-    private val testI16Values = listOf(0.toShort(), 1.toShort(), -1.toShort(), 193.toShort(), (-132).toShort(), Short.MIN_VALUE, Short.MAX_VALUE)
+    private val testI16Values = listOf(0.toShort(), 1.toShort(), (-1).toShort(), 193.toShort(), (-132).toShort(), Short.MIN_VALUE, Short.MAX_VALUE)
     private val testU24Values = listOf(0u, 1u, 1000000u, 0xFF_FFFFu)
     private val testI24Values = listOf(0, 1, -1, 1000000, -8388608, 8388607)
     private val testU32Values = listOf(0u, 1u, 1000000u, 0x12345678u, UInt.MAX_VALUE)
@@ -431,7 +431,7 @@ class ByteOrderTest {
 
         val i64s = longArrayOf(0x123456789ABCDEF0L)
         BigEndian.fromSliceI64(i64s)
-        assertEquals(-0xF214365876543210L, i64s[0])
+        assertEquals(0xF0DEBC9A78563412uL.toLong(), i64s[0])
 
         val f32s = floatArrayOf(1.0f)
         BigEndian.fromSliceF32(f32s)
