@@ -15,7 +15,7 @@ class ByteOrderTest {
     private val testI48Values = listOf(0L, 1L, -1L, 1000000000000L, -140737488355328L, 140737488355327L)
     private val testU64Values = listOf(0uL, 1uL, 1000000uL, 0x123456789ABCDEF0uL, ULong.MAX_VALUE)
     private val testI64Values = listOf(0L, 1L, -1L, 1000000L, Long.MIN_VALUE, Long.MAX_VALUE)
-    private val testF32Values = listOf(0.0f, 1.0f, -1.0f, 31.312e31f, -11.32e19f)
+    private val testF32Values = listOf(0.0f, 1.0f, -1.0f, 1234.5f, Float.fromBits(31.312e31f.toRawBits()), Float.fromBits((-11.32e19f).toRawBits()), Float.MIN_VALUE, Float.MAX_VALUE)
     private val testF64Values = listOf(0.0, 1.0, -1.0, 31.312e211, -11.32e91)
 
     // Rust u128/i128 types are omitted as Kotlin lacks 128-bit primitive integer support.

@@ -135,15 +135,17 @@ class IoTest {
 
     @Test
     fun testF32AndF64() {
+        val f32Val = Float.fromBits(31.312e31f.toRawBits())
+        val f64Val = -11.32e91
         val orders = listOf(BigEndian, LittleEndian, NativeEndian)
         for (order in orders) {
             val wtr = Buffer()
-            wtr.writeF32(31.312e31f, order)
-            wtr.writeF64(-11.32e91, order)
+            wtr.writeF32(f32Val, order)
+            wtr.writeF64(f64Val, order)
 
             val rdr = Cursor(wtr.toByteArray())
-            assertEquals(31.312e31f, rdr.readF32(order))
-            assertEquals(-11.32e91, rdr.readF64(order))
+            assertEquals(f32Val, rdr.readF32(order))
+            assertEquals(f64Val, rdr.readF64(order))
         }
     }
 
