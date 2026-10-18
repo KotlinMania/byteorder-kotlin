@@ -105,23 +105,6 @@ public interface ReadBytesExt {
         return order.readF64(buf)
     }
 
-    public fun readU16Into(dst: UShortArray, order: ByteOrder = LittleEndian) {
-        val buf = ByteArray(dst.size * 2)
-        readExact(buf)
-        order.readU16Into(buf, dst)
-    }
-
-    public fun readU32Into(dst: UIntArray, order: ByteOrder = LittleEndian) {
-        val buf = ByteArray(dst.size * 4)
-        readExact(buf)
-        order.readU32Into(buf, dst)
-    }
-
-    public fun readU64Into(dst: ULongArray, order: ByteOrder = LittleEndian) {
-        val buf = ByteArray(dst.size * 8)
-        readExact(buf)
-        order.readU64Into(buf, dst)
-    }
 
     public fun readI8Into(dst: ByteArray) {
         readExact(dst)
@@ -265,4 +248,22 @@ public interface WriteBytesExt {
         order.writeF64(buf, n)
         writeAll(buf)
     }
+}
+
+public fun ReadBytesExt.readU16Into(dst: UShortArray, order: ByteOrder = LittleEndian) {
+    val buf = ByteArray(dst.size * 2)
+    readExact(buf)
+    order.readU16Into(buf, dst)
+}
+
+public fun ReadBytesExt.readU32Into(dst: UIntArray, order: ByteOrder = LittleEndian) {
+    val buf = ByteArray(dst.size * 4)
+    readExact(buf)
+    order.readU32Into(buf, dst)
+}
+
+public fun ReadBytesExt.readU64Into(dst: ULongArray, order: ByteOrder = LittleEndian) {
+    val buf = ByteArray(dst.size * 8)
+    readExact(buf)
+    order.readU64Into(buf, dst)
 }
