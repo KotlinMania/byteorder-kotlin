@@ -173,10 +173,11 @@ public object BigEndian : ByteOrder() {
     override fun fromSliceF32(numbers: FloatArray) {
         for (i in numbers.indices) {
             val bits = numbers[i].toRawBits()
-            val rev = ((bits and 0xFF) shl 24) or
-                ((bits and 0xFF00) shl 8) or
-                ((bits ushr 8) and 0xFF00) or
-                ((bits ushr 24) and 0xFF)
+            val rev =
+                ((bits and 0xFF) shl 24) or
+                    ((bits and 0xFF00) shl 8) or
+                    ((bits ushr 8) and 0xFF00) or
+                    ((bits ushr 24) and 0xFF)
             numbers[i] = Float.fromBits(rev)
         }
     }
@@ -184,14 +185,15 @@ public object BigEndian : ByteOrder() {
     override fun fromSliceF64(numbers: DoubleArray) {
         for (i in numbers.indices) {
             val bits = numbers[i].toRawBits()
-            val rev = ((bits and 0xFFL) shl 56) or
-                ((bits and 0xFF00L) shl 40) or
-                ((bits and 0xFF_0000L) shl 24) or
-                ((bits and 0xFF00_0000L) shl 8) or
-                ((bits ushr 8) and 0xFF00_0000L) or
-                ((bits ushr 24) and 0xFF_0000L) or
-                ((bits ushr 40) and 0xFF00L) or
-                ((bits ushr 56) and 0xFFL)
+            val rev =
+                ((bits and 0xFFL) shl 56) or
+                    ((bits and 0xFF00L) shl 40) or
+                    ((bits and 0xFF_0000L) shl 24) or
+                    ((bits and 0xFF00_0000L) shl 8) or
+                    ((bits ushr 8) and 0xFF00_0000L) or
+                    ((bits ushr 24) and 0xFF_0000L) or
+                    ((bits ushr 40) and 0xFF00L) or
+                    ((bits ushr 56) and 0xFFL)
             numbers[i] = Double.fromBits(rev)
         }
     }

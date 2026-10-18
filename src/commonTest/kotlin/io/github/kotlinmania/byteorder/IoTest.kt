@@ -3,7 +3,10 @@ package io.github.kotlinmania.byteorder
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class Cursor(private val buffer: ByteArray, private var position: Int = 0) : ReadBytesExt {
+class Cursor(
+    private val buffer: ByteArray,
+    private var position: Int = 0,
+) : ReadBytesExt {
     override fun readExact(buf: ByteArray) {
         require(position + buf.size <= buffer.size) { "unexpected end of buffer" }
         buffer.copyInto(buf, 0, position, position + buf.size)
@@ -154,10 +157,13 @@ class IoTest {
         val orders = listOf(BigEndian, LittleEndian, NativeEndian)
         for (order in orders) {
             val wtr = Buffer()
-            order.writeU16Into(ushortArrayOf(1u, 2u), ByteArray(4).also {
-                order.writeU16Into(ushortArrayOf(1u, 2u), it)
-                wtr.writeAll(it)
-            })
+            order.writeU16Into(
+                ushortArrayOf(1u, 2u),
+                ByteArray(4).also {
+                    order.writeU16Into(ushortArrayOf(1u, 2u), it)
+                    wtr.writeAll(it)
+                },
+            )
 
             val rdr = Cursor(wtr.toByteArray())
             val got = UShortArray(2)
