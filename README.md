@@ -90,7 +90,7 @@ cases.
 
 ```kotlin
 dependencies {
-    implementation("io.github.kotlinmania:byteorder-kotlin:2.0.0")
+    implementation("io.github.kotlinmania:byteorder-kotlin:0.1.0")
 }
 ```
 
