@@ -1,12 +1,13 @@
 import Testing
 import Byteorder
 import KotlinStdlib
+import ExportedKotlinPackages
 
 @Suite("Byteorder Swift Export Tests")
 struct ByteorderExportTests {
     @Test("Unsigned endian encoding crosses Swift boundary")
     func unsignedEndianRoundTrip() {
-        let bytes = KotlinStdlib.ByteArray(size: 4)
+        let bytes = ExportedKotlinPackages.kotlin.ByteArray(size: 4)
         BigEndian.shared.writeU32(buf: bytes, n: 0x12345678, offset: 0)
         #expect(bytes._get(index: 0) == 0x12)
         #expect(bytes._get(index: 3) == 0x78)
@@ -20,7 +21,7 @@ struct ByteorderExportTests {
 
     @Test("Signed nonstandard widths cross Swift boundary")
     func signedWidthRoundTrip() {
-        let bytes = KotlinStdlib.ByteArray(size: 8)
+        let bytes = ExportedKotlinPackages.kotlin.ByteArray(size: 8)
         BigEndian.shared.writeI24(buf: bytes, n: -2, offset: 1)
         #expect(BigEndian.shared.readI24(buf: bytes, offset: 1) == -2)
         #expect(bytes._get(index: 1) == -1)
@@ -31,7 +32,7 @@ struct ByteorderExportTests {
 
     @Test("Floating bit patterns cross Swift boundary")
     func floatingBitPatterns() {
-        let bytes = KotlinStdlib.ByteArray(size: 8)
+        let bytes = ExportedKotlinPackages.kotlin.ByteArray(size: 8)
         BigEndian.shared.writeF64(buf: bytes, n: -0.0, offset: 0)
         #expect(BigEndian.shared.readF64(buf: bytes, offset: 0).bitPattern == Double(-0.0).bitPattern)
         LittleEndian.shared.writeF64(buf: bytes, n: .infinity, offset: 0)
