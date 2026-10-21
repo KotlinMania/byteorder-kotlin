@@ -137,7 +137,7 @@ val intellijCoroutinesVersion =
 val projectDependencyHandler = project.dependencies
 configurations.configureEach {
     if (name == "swiftExportClasspath") {
-        dependencies.add(projectDependencyHandler.create("io.github.kotlinmania:swift-export-embeddable:2.4.20-km.1"))
+        dependencies.add(projectDependencyHandler.create("io.github.kotlinmania:swift-export-embeddable:2.4.20-km.3"))
         dependencies.add(
             projectDependencyHandler.create(
                 "org.jetbrains.intellij.deps.kotlinx:kotlinx-coroutines-core-jvm:$intellijCoroutinesVersion",
@@ -1369,7 +1369,7 @@ tasks.register("hostTests") {
 }
 
 val strictSwiftConfiguration = layout.projectDirectory.file("verification/strict-swift.xcconfig")
-val swiftSdkDirectory = layout.buildDirectory.dir("swift-tooling/native-sdk")
+val swiftSdkDirectory = layout.buildDirectory.dir("swift-tooling-km3/native-sdk")
 val swiftSdkHelper =
     configurations.create("swiftNativeSdkHelper") {
         isCanBeConsumed = false
@@ -1378,7 +1378,7 @@ val swiftSdkHelper =
     }
 dependencies.add(
     swiftSdkHelper.name,
-    "io.github.kotlinmania:swift-export-embeddable:2.4.20-km.1:native-sdk-helper@zip",
+    "io.github.kotlinmania:swift-export-embeddable:2.4.20-km.3:native-sdk-helper@zip",
 )
 val prepareSwiftExportTooling =
     tasks.register("prepareSwiftExportTooling") {
@@ -1389,7 +1389,7 @@ val prepareSwiftExportTooling =
             val tools = configurations.getByName("swiftExportClasspathResolvable").resolvedConfiguration.resolvedArtifacts
             val root =
                 layout.buildDirectory
-                    .dir("swift-tooling")
+                    .dir("swift-tooling-km3")
                     .get()
                     .asFile
             root.mkdirs()
@@ -1503,18 +1503,18 @@ tasks.register("swiftExportSmokeTest") {
                 workingDir = projectDir
                 commandLine(
                     requireNotNull(gradle.gradleHomeDir).resolve("bin/gradle"),
-                    "embedSwiftExportForXcode",
+                    ":embedSwiftExportForXcode",
                     "--gradle-user-home",
                     layout.buildDirectory
-                        .dir("swift-tooling/export-gradle-home")
+                        .dir("swift-tooling-km3/export-gradle-home")
                         .get()
                         .asFile,
                     "--project-cache-dir",
                     layout.buildDirectory
-                        .dir("swift-tooling/export-project-cache")
+                        .dir("swift-tooling-km3/export-project-cache")
                         .get()
                         .asFile,
-                    "-Pkotlin.project.persistent.dir=${layout.buildDirectory.dir("swift-tooling/export-kotlin-project").get().asFile}",
+                    "-Pkotlin.project.persistent.dir=${layout.buildDirectory.dir("swift-tooling-km3/export-kotlin-project").get().asFile}",
                     "-Pkotlin.native.home=${swiftSdkDirectory.get().asFile.absolutePath}",
                     "-Dorg.gradle.jvmargs=-Xmx6g -XX:MaxMetaspaceSize=1g",
                     "--no-configuration-cache",
@@ -1526,7 +1526,7 @@ tasks.register("swiftExportSmokeTest") {
                     mapOf(
                         "GRADLE_USER_HOME" to
                             layout.buildDirectory
-                                .dir("swift-tooling/export-gradle-home")
+                                .dir("swift-tooling-km3/export-gradle-home")
                                 .get()
                                 .asFile.absolutePath,
                         "BUILT_PRODUCTS_DIR" to swiftBuildDir,
@@ -1544,7 +1544,7 @@ tasks.register("swiftExportSmokeTest") {
 
         val swiftScratch =
             layout.buildDirectory
-                .dir("swift-harness")
+                .dir("swift-harness-km3")
                 .get()
                 .asFile
         if (swiftScratch.exists()) {
@@ -1641,7 +1641,7 @@ tasks.register("swiftExportSmokeTest") {
                     "--verify-only",
                     "--output",
                     layout.buildDirectory
-                        .dir("swift-tooling")
+                        .dir("swift-tooling-km3")
                         .get()
                         .asFile,
                 )
