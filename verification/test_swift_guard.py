@@ -1,4 +1,5 @@
 import importlib.util
+import re
 import unittest
 from pathlib import Path
 
@@ -17,6 +18,11 @@ def passing_log():
 
 
 class SwiftGuardTests(unittest.TestCase):
+    def test_guard_names_match_unchanged_authored_swift_cases(self):
+        source = Path(__file__).parents[1] / "swift-test-harness/Tests/SwiftTestHarnessTests/ExampleTests.swift"
+        actual = {name: label for label, name in re.findall(r'@Test\("([^"\n]+)"\)\s+func\s+(\w+)\(', source.read_text())}
+        self.assertEqual(guard.CASES, actual)
+
     def test_accepts_three_named_cases_and_actual_mode_policy(self):
         self.assertEqual(guard.verify(passing_log())["actual_behavior_tests"], 3)
 

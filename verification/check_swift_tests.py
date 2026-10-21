@@ -5,9 +5,9 @@ import re
 from pathlib import Path
 
 CASES = {
-    "parseErrorExport": "ParseError export works",
-    "caseStyleExport": "CaseStyle and convertCase export works",
-    "strumEntryExport": "ByteorderEntry export works",
+    "unsignedEndianRoundTrip": "Unsigned endian encoding crosses Swift boundary",
+    "signedWidthRoundTrip": "Signed nonstandard widths cross Swift boundary",
+    "floatingBitPatterns": "Floating bit patterns cross Swift boundary",
 }
 
 
