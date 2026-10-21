@@ -1607,6 +1607,14 @@ tasks.register("swiftExportSmokeTest") {
             execOperations.exec {
                 workingDir = layout.projectDirectory.dir("swift-test-harness").asFile
                 commandLine(swiftTestCommand)
+                environment(
+                    "KOTLIN_SWIFT_EXPORT_PACKAGE",
+                    layout.buildDirectory
+                        .dir("SPMPackage/macosArm64/Debug")
+                        .get()
+                        .asFile.absolutePath,
+                )
+                environment("KOTLIN_SWIFT_EXPORT_ARCHIVE", swiftBuildDir)
                 standardOutput = swiftTestOutput
                 errorOutput = swiftTestOutput
                 isIgnoreExitValue = true
