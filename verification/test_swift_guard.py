@@ -11,7 +11,7 @@ spec.loader.exec_module(guard)
 def passing_log():
     lines = [f'Test "{label}" passed after 0.01 seconds.' for label in guard.CASES.values()]
     lines.append("Test run with 3 tests passed after 0.03 seconds.")
-    for module in ["Byteorder", "KotlinRuntimeSupport", "KotlinCoroutineSupport", "SwiftTestHarnessTests", "SwiftTestHarnessPackageTests"]:
+    for module in ["Byteorder", "ExportedKotlinPackages", "KotlinStdlib", "KotlinRuntimeSupport", "SwiftTestHarnessTests", "SwiftTestHarnessPackageTests"]:
         mode = " -swift-version 6" if module == "SwiftTestHarnessTests" else ("" if module == "SwiftTestHarnessPackageTests" else " -swift-version 5")
         lines.append("swift-frontend -module-name " + module + " -warnings-as-errors -target arm64-apple-macosx15.0" + mode)
     return "\n".join(lines)
@@ -62,6 +62,11 @@ class SwiftGuardTests(unittest.TestCase):
     def test_missing_product_frontend_rejected(self):
         with self.assertRaises(ValueError):
             guard.verify("\n".join(x for x in passing_log().splitlines() if "-module-name Byteorder " not in x))
+
+    def test_missing_actual_dependency_frontend_rejected(self):
+        for module in ["ExportedKotlinPackages", "KotlinStdlib", "KotlinRuntimeSupport"]:
+            with self.subTest(module=module), self.assertRaises(ValueError):
+                guard.verify("\n".join(x for x in passing_log().splitlines() if "-module-name " + module + " " not in x))
 
 
 if __name__ == "__main__":

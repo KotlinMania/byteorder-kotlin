@@ -46,7 +46,10 @@ def verify(text):
             raise ValueError("Unexpected effective Swift language mode: " + module)
         frontends.append({"module": module, "swift_language_mode": mode,
                           "warnings_as_errors": True, "macos_deployment_target": "15.0"})
-    required = {"Byteorder", "KotlinRuntimeSupport", "KotlinCoroutineSupport", "SwiftTestHarnessTests"}
+    required = {
+        "Byteorder", "ExportedKotlinPackages", "KotlinStdlib", "KotlinRuntimeSupport",
+        "SwiftTestHarnessTests", "SwiftTestHarnessPackageTests",
+    }
     if not required <= {row["module"] for row in frontends}:
         raise ValueError("Missing actual dependency/consumer frontend evidence")
     return {"actual_behavior_tests": len(CASES), "failures": 0, "skips": 0,
